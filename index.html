@@ -1,34 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bihar Board 10th Quiz | Star Classes Babhandev</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bihar Board 10th Quiz — Star Classes Babhandev (By SANJU SIR)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <h1>Bihar Board 10th Quiz</h1>
+      <div class="subtitle">By <strong>Star Classes Babhandev</strong> — <em>SANJU SIR</em></div>
+    </header>
 
-    <div class="container">
-        <h1>Bihar Board 10th Quiz</h1>
-        <h2>By Star Classes Babhandev</h2>
-        <p class="teacher">Guided by: <strong>SANJU SIR</strong></p>
-        
-        <div id="quiz">
-            <p id="question"></p>
-            <div class="options">
-                <button class="option-btn" onclick="checkAnswer(0)" id="opt0"></button>
-                <button class="option-btn" onclick="checkAnswer(1)" id="opt1"></button>
-                <button class="option-btn" onclick="checkAnswer(2)" id="opt2"></button>
-                <button class="option-btn" onclick="checkAnswer(3)" id="opt3"></button>
-                <button class="option-btn" onclick="checkAnswer(4)" id="opt4"></button>
-            </div>
-            <p id="result"></p>
-            <p>Time Left: <span id="timer">30</span> sec</p>
+    <main id="main">
+      <!-- Welcome -->
+      <section id="welcome" class="card">
+        <h2>Welcome</h2>
+        <p>Practice kariye Bihar Board Class 10 ke liye. Quiz full 50 questions — 30 minutes total. Har din quiz slightly different order me milega.</p>
+        <div class="controls">
+          <label>Apna Naam: <input id="playerName" placeholder="Apna naam likho (optional)"></label>
+          <button id="startBtn">Start Quiz</button>
         </div>
-        
-        <button id="next-btn" onclick="nextQuestion()">Next Question</button>
-    </div>
+        <p class="note">Leaderboard aur results local device par save honge.</p>
+      </section>
 
-    <script src="script.js"></script>
+      <!-- Quiz -->
+      <section id="quiz" class="card hidden">
+        <div class="top-row">
+          <div id="qmeta">
+            <span id="qnum">Q 1 / 50</span>
+            <span id="progressWrap"><progress id="progress" value="0" max="50"></progress></span>
+          </div>
+          <div id="timerWrap">Time Left: <span id="timer">30:00</span></div>
+        </div>
+
+        <div id="questionBox">
+          <h3 id="questionText"></h3>
+          <div id="options" class="options"></div>
+        </div>
+
+        <div class="quiz-actions">
+          <button id="nextBtn" class="hidden">Next</button>
+          <button id="endEarlyBtn" class="ghost">End & Submit</button>
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section id="result" class="card hidden">
+        <h2>Result</h2>
+        <div id="scoreSummary"></div>
+        <div id="message"></div>
+
+        <div id="leaderboardForm" class="leaderboard-form">
+          <label>Apna Naam (leaderboard ke liye): <input id="saveName" placeholder="Name"></label>
+          <button id="saveScoreBtn">Save Score</button>
+        </div>
+
+        <div class="result-actions">
+          <button id="retryBtn">Retry Same Quiz</button>
+          <button id="homeBtn">Back to Home</button>
+        </div>
+
+        <div class="leaderboard card small" id="leaderboardCard">
+          <h3>Leaderboard — Today</h3>
+          <ol id="leaderboardList"></ol>
+          <button id="clearBoard" class="ghost">Clear Today Leaderboard</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Star Classes Babhandev — SANJU SIR
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
