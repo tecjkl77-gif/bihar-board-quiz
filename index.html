@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bihar Board 10th Quiz | Star Classes Babhandev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bihar Board 10th Quiz</h1>
+        <h2>By Star Classes Babhandev</h2>
+        <p class="teacher">Guided by: <strong>SANJU SIR</strong></p>
+        
+        <div id="quiz">
+            <p id="question"></p>
+            <div class="options">
+                <button class="option-btn" onclick="checkAnswer(0)" id="opt0"></button>
+                <button class="option-btn" onclick="checkAnswer(1)" id="opt1"></button>
+                <button class="option-btn" onclick="checkAnswer(2)" id="opt2"></button>
+                <button class="option-btn" onclick="checkAnswer(3)" id="opt3"></button>
+                <button class="option-btn" onclick="checkAnswer(4)" id="opt4"></button>
+            </div>
+            <p id="result"></p>
+            <p>Time Left: <span id="timer">30</span> sec</p>
+        </div>
+        
+        <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
