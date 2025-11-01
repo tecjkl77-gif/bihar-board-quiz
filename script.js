@@ -1,5 +1,5 @@
 // ---------------- CONFIG ----------------
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx4L05F4emQ7vwUWIj6cXklNYD72N2FX6VI-4qk9MFmNF6AAerzQ5B7fq0YAftu7gCyMA/exec"; // your apps script URL
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4pi4fYrgtJmIJkvVtlAaOMufid7SdEerEHun5CXg32YUm8jf8OpJvIiqSs3k6JtPl8A/exec"; // your apps script URL
 const TOTAL_QUESTIONS = 50;
 const FULL_TIME_SECONDS = 30 * 60; // 30 minutes
 
@@ -222,10 +222,18 @@ function updateTimerDisplay(){
 }
 
 // END QUIZ
-function endQuiz(){
-  clearInterval(timerInterval);
-  quizSec.classList.add('hidden');
-  resultSec.classList.remove('hidden');
+function endQuiz() {
+    clearInterval(timer);
+    quizCard.classList.add("hidden");
+    resultCard.classList.remove("hidden");
+    
+    document.getElementById("result-score").textContent = score;
+    document.getElementById("result-total").textContent = TOTAL_QUESTIONS;
+    document.getElementById("result-percent").textContent = percentage + "%";
+    
+    // ✅ Send data to Google Sheet
+    saveResultToSheet(name, score, TOTAL_QUESTIONS, percentage);
+}
   // fill summary
   const totalAnswered = questions.length;
   const wrong = totalAnswered - score;
