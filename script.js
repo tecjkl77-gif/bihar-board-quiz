@@ -1,3 +1,6 @@
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx4L05F4emQ7vwUWIj6cXklNYD72N2FX6VI-4qk9MFmNF6AAerzQ5B7fq0YAftu7gCyMA/exec"; // <-- Replace only this
+
+const QUESTION_POOL = [
 const QUESTION_POOL = [
   // Hindi - 10 Questions
   {
@@ -259,3 +262,62 @@ const QUESTION_POOL = [
     answer: 0
   }
 ];
+
+
+// auto shuffle + pick 10
+const QUESTIONS = QUESTION_POOL.sort(() => 0.5 - Math.random()).slice(0, 10);
+let index = 0, score = 0, timer, timeLeft = 15;
+
+function loadQuestion() {
+    if (index >= QUESTIONS.length) return endQuiz();
+
+    document.getElementById("question").innerText = QUESTIONS[index].question;
+    let optionsHtml = "";
+    QUESTIONS[index].options.forEach((opt, i) => {
+        optionsHtml += `<button onclick="checkAnswer(${i})">${opt}</button>`;
+    });
+    document.getElementById("options").innerHTML = optionsHtml;
+    resetTimer();
+}
+
+function checkAnswer(selected) {
+    if (selected === QUESTIONS[index].correct) score++;
+    index++;
+    loadQuestion();
+}
+
+function resetTimer() {
+    clearInterval(timer);
+    timeLeft = 15;
+    document.getElementById("timer").innerText = timeLeft;
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            index++;
+            loadQuestion();
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+    clearInterval(timer);
+    document.getElementById("quiz-box").innerHTML = `
+        <h2>Quiz Finished!</h2>
+        <p>Your Score: ${score}/${QUESTIONS.length}</p>
+        <button onclick="location.reload()">Restart</button>
+    `;
+    sendToGoogleSheet();
+}
+
+function sendToGoogleSheet() {
+    fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+            name: localStorage.getItem("username") || "Unknown",
+            score: score
+        })
+    });
+}
+
+window.onload =
